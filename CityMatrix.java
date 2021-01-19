@@ -1,9 +1,12 @@
+/// Edited pushed version
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CityMatrix{
     private int[][] cityDistances;
     private int largestDistance = 0;
+
     private ArrayList<String> cities = new ArrayList<String>();
     CityMatrix(Scanner txtFile){
         insertDistances(cityGrabber(txtFile));
@@ -27,7 +30,7 @@ public class CityMatrix{
             if (!cities.contains(city1)) {
                 cities.add(city1);
             }
-            int [] x = {cities.indexOf(city0),cities.indexOf(city1),distance}; 
+            int [] x = {cities.indexOf(city0),cities.indexOf(city1),distance};
             citiesInfo.add(x);
         }
         cityDistances = new int[cities.size()][cities.size()];
