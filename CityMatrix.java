@@ -7,7 +7,7 @@ public class CityMatrix{
     
     private ArrayList<String> cities = new ArrayList<String>();
     CityMatrix(Scanner txtFile){
-
+        runScanner(txtFile);
     }
 
     public void runScanner(Scanner txtFile){
