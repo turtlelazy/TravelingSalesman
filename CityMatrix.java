@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class CityMatrix{
     private int[][] cityDistances;
-    
+    private int largestDistance = 0;
     private ArrayList<String> cities = new ArrayList<String>();
     CityMatrix(Scanner txtFile){
         insertDistances(cityGrabber(txtFile));
@@ -39,6 +39,9 @@ public class CityMatrix{
             int[] current = citiesInfo.get(i);
             cityDistances[current[0]][current[1]] = current[2];
             cityDistances[current[1]][current[0]] = current[2];
+            if (current[2] > largestDistance){
+                largestDistance = current[2];
+            }
         }
     }
 
@@ -48,6 +51,50 @@ public class CityMatrix{
 
     public int size(){
         return cities.size();
+    }
+
+    //This code is very dirty but works to see the data we're working with for testing purposes
+    public String toString(){
+        String returnString = "   ";
+        int length = String.valueOf(largestDistance).length();
+
+        for(int i = 0; i < size();i++){
+            String city = cities.get(i);
+            if(city.length() > 3){
+                returnString += city.substring(0, 2);
+            }
+            else{
+                returnString += city;
+            }
+            for(int z = 0; z < length; z ++){
+                returnString += " ";
+            }
+
+        }
+
+        returnString += "\n";
+
+        for (int x = 0; x < size(); x++) {
+
+            String city = cities.get(x);
+            if (city.length() > 3) {
+                returnString += city.substring(0, 2);
+            } else {
+                returnString += city;
+            }
+
+            returnString += " ";
+            for (int y = 0; y < size(); y++) {
+                returnString += (get(x, y));
+                for (int z = 0; z < length - String.valueOf(get(x,y)).length() + 2; z++) {
+                    returnString += " ";
+                }
+            }
+            returnString += ("\n");
+        }
+
+
+        return returnString;
     }
 
 }
