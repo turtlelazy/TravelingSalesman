@@ -58,18 +58,18 @@ public class CityMatrix{
 
     //This code is very dirty but works to see the data we're working with for testing purposes
     public String toString(){
-        String returnString = "   ";
+        String returnString = "    ";
         int length = String.valueOf(largestDistance).length();
 
         for(int i = 0; i < size();i++){
             String city = cities.get(i);
-            if(city.length() > 3){
-                returnString += city.substring(0, 2);
+            if (city.length() > 3) {
+                city = city.substring(0, 3);
             }
-            else{
-                returnString += city;
-            }
-            for(int z = 0; z < length; z ++){
+
+            returnString += city;
+
+            for(int z = 0; z < length - city.length() + 2; z++){
                 returnString += " ";
             }
 
@@ -81,12 +81,15 @@ public class CityMatrix{
 
             String city = cities.get(x);
             if (city.length() > 3) {
-                returnString += city.substring(0, 2);
-            } else {
-                returnString += city;
+                city = city.substring(0, 3);
             }
+            
+            returnString += city;
 
-            returnString += " ";
+            for(int z = 0; z < 2 - city.length() + 2; z ++){
+                returnString += " ";
+            }
+            
             for (int y = 0; y < size(); y++) {
                 returnString += (get(x, y));
                 for (int z = 0; z < length - String.valueOf(get(x,y)).length() + 2; z++) {
