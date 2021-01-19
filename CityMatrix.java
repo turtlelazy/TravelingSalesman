@@ -14,6 +14,7 @@ public class CityMatrix{
     }
 
     public ArrayList<int[]> cityGrabber(Scanner txtFile){
+      //reading in file
         ArrayList<int[]> citiesInfo = new ArrayList<int[]>();
         while(txtFile.hasNext()){
             String city0 = txtFile.next();
@@ -37,6 +38,8 @@ public class CityMatrix{
         cityDistances = new int[cities.size()][cities.size()];
         return citiesInfo;
     }
+
+    //2D array with distances
 
     public void insertDistances(ArrayList<int[]> citiesInfo){
         for(int i = 0; i < citiesInfo.size();i++){
