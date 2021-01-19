@@ -7,7 +7,8 @@ public class CityMatrix{
     private int[][] cityDistances;
     private int largestDistance = 0;
 
-    private ArrayList<String> cities = new ArrayList<String>();
+    public ArrayList<String> cities = new ArrayList<String>();
+
     CityMatrix(Scanner txtFile){
         insertDistances(cityGrabber(txtFile));
     }
@@ -48,12 +49,20 @@ public class CityMatrix{
         }
     }
 
+    public int[] getArray(int x){
+      return cityDistances[x];
+    }
+
     public int get(int x, int y){
         return cityDistances[x][y];
     }
 
     public int size(){
         return cities.size();
+    }
+
+    public int getCityCode(String city){
+      return cities.indexOf(city);
     }
 
     //This code is very dirty but works to see the data we're working with for testing purposes
@@ -83,13 +92,13 @@ public class CityMatrix{
             if (city.length() > 3) {
                 city = city.substring(0, 3);
             }
-            
+
             returnString += city;
 
             for(int z = 0; z < 2 - city.length() + 2; z ++){
                 returnString += " ";
             }
-            
+
             for (int y = 0; y < size(); y++) {
                 returnString += (get(x, y));
                 for (int z = 0; z < length - String.valueOf(get(x,y)).length() + 2; z++) {
