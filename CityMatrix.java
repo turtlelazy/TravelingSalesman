@@ -46,4 +46,8 @@ public class CityMatrix{
         return cityDistances[x][y];
     }
 
+    public int size(){
+        return cities.size();
+    }
+
 }
