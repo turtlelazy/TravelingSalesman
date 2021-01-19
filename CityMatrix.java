@@ -6,11 +6,11 @@ public class CityMatrix{
     
     private ArrayList<String> cities = new ArrayList<String>();
     CityMatrix(Scanner txtFile){
-        cityGrabber(txtFile);
-        insertDistances(txtFile);
+        insertDistances(cityGrabber(txtFile));
     }
 
-    public void cityGrabber(Scanner txtFile){
+    public ArrayList<int[]> cityGrabber(Scanner txtFile){
+        ArrayList<int[]> citiesInfo = new ArrayList<int[]>();
         while(txtFile.hasNext()){
             String city0 = txtFile.next();
 
@@ -19,7 +19,7 @@ public class CityMatrix{
             String city1 = txtFile.next();
 
             txtFile.next(); //skips the "="
-            txtFile.next(); //skips the distance
+            int distance = Integer.parseInt(txtFile.next()); //skips the distance
             if (!cities.contains(city0)) {
                 cities.add(city0);
             }
@@ -27,24 +27,19 @@ public class CityMatrix{
             if (!cities.contains(city1)) {
                 cities.add(city1);
             }
-
-            cityDistances = new int[cities.size()][cities.size()];
+            int [] x = {cities.indexOf(city0),cities.indexOf(city1),distance}; 
+            citiesInfo.add(x);
         }
+        cityDistances = new int[cities.size()][cities.size()];
+        return citiesInfo;
     }
 
-    public void insertDistances(Scanner txtFile){
-        String city0 = txtFile.next();
-
-        txtFile.next(); // skips the "to"
-
-        String city1 = txtFile.next();
-
-        txtFile.next(); // skips the "="
-
-        int distance = Integer.parseInt(txtFile.next());
-
-        cityDistances[cities.indexOf(city0)][cities.indexOf(city1)] = distance;
-        cityDistances[cities.indexOf(city1)][cities.indexOf(city0)] = distance;
+    public void insertDistances(ArrayList<int[]> citiesInfo){
+        for(int i = 0; i < citiesInfo.size();i++){
+            int[] current = citiesInfo.get(i);
+            cityDistances[current[0]][current[1]] = current[2];
+            cityDistances[current[1]][current[0]] = current[2];
+        }
     }
 
     public int get(int x, int y){
